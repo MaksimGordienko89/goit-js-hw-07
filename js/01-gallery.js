@@ -12,9 +12,17 @@ let instance;
 
 function onClickImg(e) {
   e.preventDefault();
-  instance = basicLightbox.create(`
+  (instance = basicLightbox.create(`
     <img src="${e.target.dataset.source}" >
-`);
+`)),
+    {
+      onShow: (instance) => {
+        document.addEventListener("keydown", onEscClose);
+      },
+      onClose: (instance) => {
+        document.addEventListener("keydown", onEscClose);
+      },
+    };
 
   instance.show();
 
@@ -26,7 +34,7 @@ function onEscClose(e) {
   if (e.key === "Escape") {
     instance.close();
   }
-  return;
+  // return;
 }
 
 galleryList.addEventListener("click", onClickImg);
