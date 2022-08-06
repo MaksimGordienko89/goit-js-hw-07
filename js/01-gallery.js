@@ -12,6 +12,11 @@ let instance;
 
 function onClickImg(e) {
   e.preventDefault();
+  const isLink = e.target.dataset.source;
+  if (!isLink) {
+    return;
+  }
+
   (instance = basicLightbox.create(`
     <img src="${e.target.dataset.source}" >
 `)),
